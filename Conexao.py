@@ -8,6 +8,7 @@ def Conexao():
 
 def ConexaoBanco():
     # Conectando ao banco
-    client = Conexao()
+    nome_banco = 'Registros'
+    client = Conexao().get_database(nome_banco)
     return client
 # def ConexaoBanco

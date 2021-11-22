@@ -8,8 +8,7 @@ def LimparTerminal():
         os.system('cls')
 # def LimparTerminal
 
-def LeituraBanco(client):
-    db = client.get_database('Registros')
+def LeituraBanco(db):
     return db.get_collection('pessoas')
 # def LeituraBanco
 
@@ -39,7 +38,7 @@ def EfetuarCadastro(db, cod):
 
 def VisualizarCadastros():
     # Acessando banco para obter os registros
-    registros = LeituraBanco(Conexao())
+    registros = LeituraBanco(ConexaoBanco())
     
     LimparTerminal()
     print(" 「 Cadastros 」 ")
@@ -54,3 +53,12 @@ def VisualizarCadastros():
     input()
     LimparTerminal()
 # def VisualizarCadastros
+
+def IdMax():
+    registros = LeituraBanco(ConexaoBanco())
+    if registros.count_documents({}) != 0:
+        for registro in registros.find().sort('_id',-1).limit(1):
+            return registro.get('id')+1
+    else:
+        return 1
+# def IdMax

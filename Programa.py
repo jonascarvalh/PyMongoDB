@@ -2,10 +2,12 @@ from Conexao import *
 from Funcoes import *
 
 # O nome do meu banco é "Registros"
-db = Conexao().Registros
-cod = 1
+banco = 'Registros'
+db = ConexaoBanco()
 
 while(1):
+    # Retorna o último ID registrado
+    cod = IdMax()
     print("1. Efetuar Cadastro")
     print("2. Visualizar Cadastros")
     opcao = int(input(">> "))
@@ -18,7 +20,3 @@ while(1):
     else:
         print("Opção Inválida!")
 # Menu
-
-# Coisas Importantes que faltam:
-# retornar o ID do último cadastrado
-# Assim não terão ID's repetidos
