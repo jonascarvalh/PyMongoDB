@@ -1,8 +1,6 @@
 from Conexao import *
 from Funcoes import *
 
-# O nome do meu banco é "Registros"
-banco = 'Registros'
 db = ConexaoBanco()
 
 while(1):
@@ -10,13 +8,25 @@ while(1):
     cod = IdMax()
     print("1. Efetuar Cadastro")
     print("2. Visualizar Cadastros")
+    print('3. Consultar')
+    print("4. Atualizar Cadastro")
+    print("5. Deletar Cadastro")
     opcao = int(input(">> "))
 
-    if opcao == 1:
-        EfetuarCadastro(db,cod)
-        cod += 1
-    elif opcao == 2:
-        VisualizarCadastros()
-    else:
-        print("Opção Inválida!")
+    match opcao:
+        case 1:
+            EfetuarCadastro(db,cod)
+            cod += 1
+        case 2:
+            VisualizarCadastros()
+        case 3:
+            LimparTerminal()
+            cod = int(input('ID a ser consultado: '))
+            ConsultarCadastro(cod)
+        case 4:
+            AtualizarCadastro()
+        case 5:
+            ...
+        case _:
+            print("Opção Inválida!")
 # Menu

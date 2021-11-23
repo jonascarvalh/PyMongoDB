@@ -12,3 +12,7 @@ def ConexaoBanco():
     client = Conexao().get_database(nome_banco)
     return client
 # def ConexaoBanco
+
+def LeituraBanco(db):
+    return db.get_collection('pessoas')
+# def LeituraBanco

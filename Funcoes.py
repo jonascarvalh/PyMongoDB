@@ -8,10 +8,6 @@ def LimparTerminal():
         os.system('cls')
 # def LimparTerminal
 
-def LeituraBanco(db):
-    return db.get_collection('pessoas')
-# def LeituraBanco
-
 def ModeloDados(cod, nome, idade):
     dados = {
         "id": cod,
@@ -53,6 +49,46 @@ def VisualizarCadastros():
     input()
     LimparTerminal()
 # def VisualizarCadastros
+
+def ConsultarCadastro(cod):
+    print(" 「 Consulta 」 ")
+    registros = LeituraBanco(ConexaoBanco())
+    for registro in registros.find({'id': cod}).limit(1):
+        if not registro:
+            print('Registro não encontrado')
+            return False
+        else:
+            print('ID: ', registro.get('id'))
+            print('Nome: ', registro.get('Nome'))
+            print('Idade: ', registro.get('Idade'))
+    
+    input()
+    LimparTerminal()
+    return registros
+# def ConsultarCadastro
+
+
+def AtualizarCadastro():
+    LimparTerminal()
+    print(" 「 Alteração 」 ")
+    cod = int(input('ID do usuário a ser alterado: '))
+    registros = ConsultarCadastro(cod)
+    if registros == False:
+        print('Registro não encontrado')
+
+    registros.update(
+        {'id': cod},
+        {'$set': {'Nome': input('Nome: ')}}
+    )
+    registros.update(
+        {'id': cod},
+        {'$set': {'Idade': input('Idade: ')}}
+    )
+    
+    print('Dados atulizados')
+    input()
+    LimparTerminal()
+# def AtualizarCadastro
 
 def IdMax():
     registros = LeituraBanco(ConexaoBanco())
