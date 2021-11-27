@@ -98,3 +98,12 @@ def IdMax():
     else:
         return 1
 # def IdMax
+
+def DeletarCadastro():
+    LimparTerminal()
+    registros = LeituraBanco(ConexaoBanco())
+
+    cod = int(input('Indique o ID a ser deletado: '))
+    registros.remove({'id': cod})
+
+    print(f'O registro {cod} foi deletado')

@@ -26,7 +26,7 @@ while(1):
         case 4:
             AtualizarCadastro()
         case 5:
-            ...
+            DeletarCadastro()
         case _:
             print("Opção Inválida!")
 # Menu
