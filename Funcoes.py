@@ -76,14 +76,15 @@ def AtualizarCadastro():
     if registros == False:
         print('Registro não encontrado')
 
-    registros.update(
+    registros.update_one(
         {'id': cod},
         {'$set': {'Nome': input('Nome: ')}}
-    )
-    registros.update(
+    ) # Atualizar Nome
+
+    registros.update_one(
         {'id': cod},
         {'$set': {'Idade': input('Idade: ')}}
-    )
+    ) # Atualizar Idade
     
     print('Dados atulizados')
     input()
@@ -104,6 +105,9 @@ def DeletarCadastro():
     registros = LeituraBanco(ConexaoBanco())
 
     cod = int(input('Indique o ID a ser deletado: '))
-    registros.remove({'id': cod})
-
-    print(f'O registro {cod} foi deletado')
+    
+    try:
+        registros.delete_one({'id': cod})
+        print(f'O registro {cod} foi deletado')
+    except:
+        print('Houve um erro ao deletar')
